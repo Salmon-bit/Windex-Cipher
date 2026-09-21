@@ -106,10 +106,10 @@ class Main(ctk.CTk):
             else:
                 self.output_tb.delete("0.0", "end")
                 self.output_tb.insert("0.0", decode(self.input_tb.get("0.0", "end").strip()))
-       except:
-            self.output_tb.delete("0.0", "end")
-            self.output_tb.insert("0.0", "Не удалось успешно закодировать/декодировать информацию.\nВ ваших входниых данных, возможно, ошибка.")
-        self.output_tb.configure(state="disabled")
+        except:
+           self.output_tb.delete("0.0", "end")
+           self.output_tb.insert("0.0", "Не удалось успешно закодировать/декодировать информацию.\nВ ваших входниых данных, возможно, ошибка.")
+           self.output_tb.configure(state="disabled")
 
     
 if __name__ == "__main__":
