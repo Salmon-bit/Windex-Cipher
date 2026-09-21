@@ -16,7 +16,7 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            artifact_name: Windex-Cipher.exe
+            artifact_name: WindexCipher.exe
           - os: ubuntu-latest
             artifact_name: WindexCipher-linux
           - os: macos-latest
