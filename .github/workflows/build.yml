@@ -13,7 +13,7 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            artifact_name: WindexCipher.exe
+            artifact_name: Windex-Cipher.exe
           - os: ubuntu-latest
             artifact_name: WindexCipher-linux
           - os: macos-latest
@@ -44,9 +44,9 @@ jobs:
       shell: bash
       run: |
         if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-          mv "dist/WindexCipher.exe" "dist/WindexCipher-linux"
+          mv "dist/Windex-Cipher.exe" "dist/WindexCipher-linux"
         elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-          mv "dist/WindexCipher.exe" "dist/WindexCipher-macos"
+          mv "dist/Windex-Cipher.exe" "dist/WindexCipher-macos"
         fi
 
     - name: Create Release and Upload Artifact
