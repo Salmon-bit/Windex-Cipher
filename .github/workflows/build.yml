@@ -31,7 +31,7 @@ jobs:
     - name: Create Release and Upload Artifact
       uses: softprops/action-gh-release@v2
       with:
-        files: dist/WindexCipher.exe
+        files: dist/Windex-Cipher.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
