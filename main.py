@@ -1,6 +1,9 @@
 import tkinter
+import os
+import sys
 import customtkinter as ctk
 import data
+from PIL import Image
 
 
 WINDEX_ALPHABET = "!AaBbCcDdEeFf123456"
@@ -8,6 +11,10 @@ MAIN_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.
 DIVIDER = len(WINDEX_ALPHABET) - 1
 SEPARATOR = ":"
 
+BUNDLE_DIR = getattr(sys, '_MEIPASS', os.path.abspath("."))
+
+def resource_path(relative_path):
+    return os.path.join(BUNDLE_DIR, relative_path)
 
 def encode(text: str) -> str:
 	indexes = []
@@ -53,6 +60,24 @@ class Main(ctk.CTk):
 
         self.geometry("300x535")
         self.title("Windex Cipher")
+        self.resizable(False, False)
+
+        try:
+            if sys.platform.startswith("win"):
+                self.iconbitmap(resource_path("icon32.ico"))
+            else:
+                icon_file = resource_path("icon32.png") # Или "icon32.ico", если нет png
+                if os.path.exists(icon_file):
+                    pil_img = Image.open(icon_file)
+                    from PIL import ImageTk
+                    tk_photo = ImageTk.PhotoImage(pil_img)
+
+                    self._icon_reference = tk_photo # type: ignore
+
+                    self.wm_iconphoto(False, tk_photo)
+
+        except Exception as e:
+            print(f"Error setting window icon {e}")
 
         try:
             dat = data.get_settings()
