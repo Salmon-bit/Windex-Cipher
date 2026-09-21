@@ -44,9 +44,9 @@ jobs:
       shell: bash
       run: |
         if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-          mv "dist/Windex-Cipher.exe" "dist/WindexCipher-linux"
+          mv "dist/WindexCipher.exe" "dist/WindexCipher-linux"
         elif [ "${{ matrix.os }}" = "macos-latest" ]; then
-          mv "dist/Windex-Cipher.exe" "dist/WindexCipher-macos"
+          mv "dist/WindexCipher.exe" "dist/WindexCipher-macos"
         fi
 
     - name: Create Release and Upload Artifact
