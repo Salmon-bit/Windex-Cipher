@@ -4,53 +4,20 @@ import sys
 import customtkinter as ctk
 import data
 from PIL import Image
+from functions import encode, decode
 
 
 WINDEX_ALPHABET = "!AaBbCcDdEeFf123456"
-MAIN_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789., !?:;@/\\|_+-'\"#₽&()*~`•√π÷×§∆£€$¢^°={}©®™✓[]<>абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСИУФХЦЧШЩЪЫЬЭЮЯ"
+MAIN_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789., !?:;@/\\|_+-'\"#₽&()*~`•√π÷×§∆£€$¢^°={}©®™✓[]<>\nабвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
 DIVIDER = len(WINDEX_ALPHABET) - 1
 SEPARATOR = ":"
 
 BUNDLE_DIR = getattr(sys, '_MEIPASS', os.path.abspath("."))
 
+
 def resource_path(relative_path):
     return os.path.join(BUNDLE_DIR, relative_path)
 
-def encode(text: str) -> str:
-	indexes = []
-	for s in text:
-		num = MAIN_ALPHABET.index(s) + 1
-		print(num)
-		if num <= DIVIDER:
-			indexes.append((0, num))
-		elif num % DIVIDER == 0:
-			indexes.append((num // DIVIDER, 0))
-		else:
-			indexes.append((num // DIVIDER, num % DIVIDER))
-	output = []
-	for i in indexes:
-		ap = ""
-		for n in i:
-			print(n)
-			ap += WINDEX_ALPHABET[n]
-		output.append(ap)
-	
-	return SEPARATOR.join(output)
-
-
-def decode(text: str) -> str:
-	if text[-1] == SEPARATOR:
-		text = text[:-1]
-	input = text.split(SEPARATOR)
-	output = ""
-	for i in input:
-		k = WINDEX_ALPHABET.index(i[0]) * DIVIDER
-		n = WINDEX_ALPHABET.index(i[1])
-		k += n
-		m = MAIN_ALPHABET[k - 1]
-		output += m
-	
-	return output
 
 
 class Main(ctk.CTk):
@@ -134,7 +101,7 @@ class Main(ctk.CTk):
         except:
            self.output_tb.delete("0.0", "end")
            self.output_tb.insert("0.0", "Не удалось успешно закодировать/декодировать информацию.\nВ ваших входниых данных, возможно, ошибка.")
-           self.output_tb.configure(state="disabled")
+        self.output_tb.configure(state="disabled")
 
     
 if __name__ == "__main__":
